@@ -47,14 +47,19 @@ Les informations enregistrées pour chaque animé comprennent:
 La base de données contient les tables suivantes:
 
 **Studio**
+
 Contient les studios de production
 
 **Anime**
+
 Contient les informations principales sur les animés.
 
 **Character**
+
 Contient les personnages associés à un animé.
 
 **Genre**
+
 Contient les genres d'animés.
+
 
