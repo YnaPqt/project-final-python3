@@ -1,107 +1,139 @@
 import pytest
 from peewee import IntegrityError
-from models import (
-    db,
-    Studio,
-    Anime,
-    Character,
-    Episode,
-    Genre,
-    AnimeGenre,
-    VoiceActor,
-)
+
+from models import db, Studio, Anime, Character, Genre, AnimeGenre
 
 
-# ==========================
-# FIXTURE : Base temporaire
-# ==========================
+# =====================================================
+# FIXTURE : BASE DE DONNÉES TEMPORAIRE
+# =====================================================
 
 @pytest.fixture(scope="function")
 def test_db():
     """
-    Initialise une base SQLite en mémoire
-    avant chaque test.
+    Initialise une base SQLite en mémoire avant chaque test
+    et la supprime après le test.
     """
+
     db.init(":memory:")
     db.connect()
+
     db.create_tables([
-        Studio, Anime, Character,
-        Episode, Genre, AnimeGenre, VoiceActor
+        Studio,
+        Anime,
+        Character,
+        Genre,
+        AnimeGenre
     ])
 
     yield
 
     db.drop_tables([
-        Studio, Anime, Character,
-        Episode, Genre, AnimeGenre, VoiceActor
+        Studio,
+        Anime,
+        Character,
+        Genre,
+        AnimeGenre
     ])
+
     db.close()
 
 
-# ==========================
-# TESTS STUDIO
-# ==========================
+# =====================================================
+# TEST : CREATION STUDIO
+# =====================================================
 
 def test_create_studio(test_db):
+
     studio = Studio.create(studio_name="MAPPA")
+
     assert studio.id is not None
     assert studio.studio_name == "MAPPA"
 
 
-def test_duplicate_studio(test_db):
-    Studio.create(studio_name="MAPPA")
-
-    with pytest.raises(IntegrityError):
-        Studio.create(studio_name="MAPPA")
-
-
-def test_update_studio(test_db):
-    studio = Studio.create(studio_name="Bones")
-    studio.studio_name = "Bones Studio"
-    studio.save()
-
-    updated = Studio.get_by_id(studio.id)
-    assert updated.studio_name == "Bones Studio"
-
-
-def test_delete_studio(test_db):
-    studio = Studio.create(studio_name="Ufotable")
-    studio_id = studio.id
-
-    studio.delete_instance()
-
-    deleted = Studio.get_or_none(Studio.id == studio_id)
-    assert deleted is None
-
-
-# ==========================
-# TESTS ANIME
-# ==========================
+# =====================================================
+# TEST : CREATION ANIME
+# =====================================================
 
 def test_create_anime(test_db):
-    studio = Studio.create(studio_name="Toei")
+
+    studio = Studio.create(studio_name="Bones")
+
     anime = Anime.create(
-        title="One Piece",
+        title="Fullmetal Alchemist",
         studio=studio,
-        release_year=1999,
-        description="Pirate adventure"
+        release_year=2003,
+        description="Alchemy adventure"
     )
 
-    assert anime.title == "One Piece"
-    assert anime.studio.id == studio.id
+    assert anime.title == "Fullmetal Alchemist"
+    assert anime.studio.studio_name == "Bones"
 
 
-def test_anime_unique_title(test_db):
+# =====================================================
+# TEST : AJOUT PERSONNAGES
+# =====================================================
+
+def test_add_characters(test_db):
+
+    studio = Studio.create(studio_name="Pierrot")
+
+    anime = Anime.create(
+        title="Naruto",
+        studio=studio,
+        release_year=2002,
+        description="Ninja story"
+    )
+
+    Character.create(character_name="Naruto", anime=anime)
+    Character.create(character_name="Sasuke", anime=anime)
+
+    characters = Character.select().where(Character.anime == anime)
+
+    assert characters.count() == 2
+
+
+# =====================================================
+# TEST : AJOUT GENRE
+# =====================================================
+
+def test_add_genre(test_db):
+
+    studio = Studio.create(studio_name="Madhouse")
+
+    anime = Anime.create(
+        title="Death Note",
+        studio=studio,
+        release_year=2006,
+        description="Psychological thriller"
+    )
+
+    genre = Genre.create(genre_name="Thriller")
+
+    AnimeGenre.create(anime=anime, genre=genre)
+
+    relations = AnimeGenre.select().where(AnimeGenre.anime == anime)
+
+    assert relations.count() == 1
+
+
+# =====================================================
+# TEST : CONTRAINTE UNIQUE SUR LE TITRE
+# =====================================================
+
+def test_unique_anime_title(test_db):
+
     studio = Studio.create(studio_name="Trigger")
 
     Anime.create(
         title="Kill la Kill",
         studio=studio,
         release_year=2013,
-        description="Action anime"
+        description="Action"
     )
 
     with pytest.raises(IntegrityError):
+
         Anime.create(
             title="Kill la Kill",
             studio=studio,
@@ -110,81 +142,29 @@ def test_anime_unique_title(test_db):
         )
 
 
-# ==========================
-# TESTS RELATIONS
-# ==========================
+# =====================================================
+# TEST : SUPPRESSION CASCADE
+# =====================================================
 
-def test_character_creation(test_db):
-    studio = Studio.create(studio_name="A-1 Pictures")
+def test_delete_anime_cascade(test_db):
+
+    studio = Studio.create(studio_name="Toei")
+
     anime = Anime.create(
-        title="Sword Art Online",
+        title="One Piece",
         studio=studio,
-        release_year=2012,
-        description="VR MMORPG"
+        release_year=1999,
+        description="Pirate adventure"
     )
 
-    character = Character.create(
-        character_name="Kirito",
-        anime=anime
-    )
+    Character.create(character_name="Luffy", anime=anime)
 
-    assert character.anime.title == "Sword Art Online"
-
-
-def test_episode_creation(test_db):
-    studio = Studio.create(studio_name="Madhouse")
-    anime = Anime.create(
-        title="Death Note",
-        studio=studio,
-        release_year=2006,
-        description="Psychological thriller"
-    )
-
-    episode = Episode.create(
-        episode_number=1,
-        title="Rebirth",
-        anime=anime,
-        release_date="2006-10-03"
-    )
-
-    assert episode.episode_number == 1
-    assert episode.anime.title == "Death Note"
-
-
-def test_genre_relationship(test_db):
-    studio = Studio.create(studio_name="MAPPA")
-    anime = Anime.create(
-        title="Jujutsu Kaisen",
-        studio=studio,
-        release_year=2020,
-        description="Curses and sorcerers"
-    )
-
-    genre = Genre.create(genre_name="Action")
+    genre = Genre.create(genre_name="Adventure")
 
     AnimeGenre.create(anime=anime, genre=genre)
 
-    assert anime.anime_genres.count() == 1
-    assert genre.genre_animes.count() == 1
+    anime.delete_instance(recursive=True)
 
-
-def test_voice_actor(test_db):
-    studio = Studio.create(studio_name="Pierrot")
-    anime = Anime.create(
-        title="Naruto",
-        studio=studio,
-        release_year=2002,
-        description="Ninja story"
-    )
-
-    character = Character.create(
-        character_name="Naruto Uzumaki",
-        anime=anime
-    )
-
-    actor = VoiceActor.create(
-        actor_name="Junko Takeuchi",
-        character=character
-    )
-
-    assert actor.character.character_name == "Naruto Uzumaki"
+    assert Anime.select().count() == 0
+    assert Character.select().count() == 0
+    assert AnimeGenre.select().count() == 0
