@@ -1,10 +1,13 @@
+# Import de tous les modèles de la base
 from models import *
 import peewee
 import pandas as pd
 from peewee import IntegrityError
 
 
-# CREATE
+# ========================================================
+# Créatuib d'un nouvel anime via 
+# ========================================================
 
 def create_anime():
     print("\n --- CREATE ANIME---")
