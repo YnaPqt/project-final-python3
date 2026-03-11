@@ -78,27 +78,27 @@ Activer l'environnement:
 
 Mac / Linux
 
-    `</> Bash
+`    </> Bash
     
     source .venv/bin/Active
+`
 
-   `
 Windows
 
-    `</> Bash
+`    </> Bash
     
     .venv\Scripts\activate
     `
 Installer les dépendances:
 
-    `</> Bash
+  `  </> Bash
     
     pip install -r requirements.txt
     `
 
 ## Lancer l'application
 
-    `</> Bash
+  `  </> Bash
     
     python app.py
     `
