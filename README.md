@@ -62,6 +62,8 @@ La base de données contient les tables suivantes:
 ## Installation
 Cloner le projet: 
 
+`</> Bash
+`
 `git clone https://github.com/YnaPqt/project-final-python3.git
     cd  Projet_Final_Python3
 `
