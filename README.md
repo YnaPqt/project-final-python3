@@ -36,27 +36,102 @@ Les informations enregistrées pour chaque animé comprennent:
   - requirements.txt
   - README.md
  
-- models.py: Défintion des modèles Peewee et structure de la base de données
-- anime_modules.py: Logique de l'application et les fonctions en CRUD
-- app.py: Interface en ligne de commade dont le menu interactif
-- test_app.py: Tests automatisés avec pytest
-- anime.db: Base de données SQLite
-- requirements.txt: Dépendances du projet
+- models.py - Défintion des modèles Peewee et structure de la base de données
+- anime_modules.py - Logique de l'application et les fonctions en CRUD
+- app.py - Interface en ligne de commade dont le menu interactif
+- test_app.py - Tests automatisés avec pytest
+- anime.db - Base de données SQLite
+- requirements.txt - Dépendances du projet
 
 ## Modèles de données
 La base de données contient les tables suivantes:
 
-**Studio**
-Contient les studios de production
+**Studio :** Contient les studios de production
+**Anime :** Contient les informations principales sur les animés.
+**Character :** Contient les personnages associés à un animé.
+**Genre :** Contient les genres d'animés.
 
-**Anime**
-Contient les informations principales sur les animés.
+## Installation
+Cloner le projet:
 
-**Character**
-Contient les personnages associés à un animé.
+</> Bash
+`    git clone https://github.com/YnaPqt/project-final-python3.git
+    cd  Projet_Final_Python3`
 
-**Genre**
-Contient les genres d'animés.
+Créer un environnement virtuel:
 
+</> Bash
+   ` python -m venv .venv
+`
+Activer l'environnement:
 
+Mac / Linux
 
+</> Bash
+    `source .venv/bin/Active
+    `
+Windows
+</> Bash
+    `.venv\Scripts\activate
+    `
+Installer les dépendances:
+</> Bash
+    `pip install -r requirements.txt
+    `
+
+## Lancer l'application
+
+</> Bash
+    `python app.py
+    `
+
+Le menu suivant apparaîtra:
+
+    `=== ANIME DATABASE===
+    1. Create Anime
+    2. View list Anime
+    3. Update Anime
+    4. Delete Anime
+    5. Exit`
+
+## Fonctionnalités
+
+**Create Anime**
+
+Ajoute un nouvel anime avec :
+
+- studio
+- personnages
+- genres
+
+Si le studio ou le genre n'existe pas, ils sont automatiquement créés.
+
+**View list Anime**
+
+Affiche les animes sous forme de DataFrame Pandas.
+
+**Update Anime**
+
+Permet de modifier:
+
+- titre
+- année
+- description
+- personnages
+- genres
+
+**Delete Anime**
+
+Supprime un anime et toutes ses relations:
+
+- personnages
+- genres associés
+
+**Tests**
+
+Lest tests sont réalisés avec pytest.
+
+Pour lancer les tests:
+
+</> Bash
+    pytest -v
