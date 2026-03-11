@@ -171,9 +171,6 @@ Pour lancer les tests:
 Projet realisé dans le cadre d'un exercice Python portant sur:
 
 - Peewee
-
 - CRUD
-
 - architecture de projet Python
-
 - tests avec pytest
