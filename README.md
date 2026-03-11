@@ -63,40 +63,44 @@ La base de données contient les tables suivantes:
 Cloner le projet:
 
 `</> Bash  
+
 git clone https://github.com/YnaPqt/project-final-python3.git
     cd  Projet_Final_Python3`
 
 Créer un environnement virtuel:
 
-   `</> Bash
+`</> Bash
+   
    python -m venv .venv
 `
+
 Activer l'environnement:
 
 Mac / Linux
 
-</> Bash
+    `</> Bash
+    
+    source .venv/bin/Active
 
-    `source .venv/bin/Active
-    `
+   `
 Windows
 
-</> Bash
-
-    `.venv\Scripts\activate
+    `</> Bash
+    
+    .venv\Scripts\activate
     `
 Installer les dépendances:
 
-</> Bash
-
-    `pip install -r requirements.txt
+    `</> Bash
+    
+    pip install -r requirements.txt
     `
 
 ## Lancer l'application
 
-</> Bash
-
-    `python app.py
+    `</> Bash
+    
+    python app.py
     `
 
 Le menu suivant apparaîtra:
