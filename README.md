@@ -60,13 +60,11 @@ La base de données contient les tables suivantes:
 **Genre :** Contient les genres d'animés.
 
 ## Installation
-Cloner le projet:
+Cloner le projet: 
 
-`</> Bash  
-
-git clone https://github.com/YnaPqt/project-final-python3.git
-    cd  Projet_Final_Python3`
-
+`git clone https://github.com/YnaPqt/project-final-python3.git
+    cd  Projet_Final_Python3
+`
 Créer un environnement virtuel:
 
 `</> Bash
