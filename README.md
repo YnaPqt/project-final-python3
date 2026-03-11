@@ -65,6 +65,7 @@ Cloner le projet:
 `git clone https://github.com/YnaPqt/project-final-python3.git
     cd  Projet_Final_Python3
 `
+
 Créer un environnement virtuel:
 
 `</> Bash
