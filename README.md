@@ -19,14 +19,14 @@ Les informations enregistrées pour chaque animé comprennent:
 - les personnages
 - les genres
 
-  ## Technologies utilisées
+## Technologies utilisées
   - Python
   - Peewe
   - SQLite
   - Pandas
   - Pytest
 
-  ## Structure
+## Structure
   Project-final-python3 /
   - models.py
   - anime_modules.py
@@ -55,12 +55,14 @@ La base de données contient les tables suivantes:
 Cloner le projet:
 
 </> Bash
+
 `    git clone https://github.com/YnaPqt/project-final-python3.git
     cd  Projet_Final_Python3`
 
 Créer un environnement virtuel:
 
 </> Bash
+
    ` python -m venv .venv
 `
 Activer l'environnement:
@@ -68,20 +70,26 @@ Activer l'environnement:
 Mac / Linux
 
 </> Bash
+
     `source .venv/bin/Active
     `
 Windows
+
 </> Bash
+
     `.venv\Scripts\activate
     `
 Installer les dépendances:
+
 </> Bash
+
     `pip install -r requirements.txt
     `
 
 ## Lancer l'application
 
 </> Bash
+
     `python app.py
     `
 
