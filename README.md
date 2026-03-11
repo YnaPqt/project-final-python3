@@ -159,5 +159,20 @@ Lest tests sont réalisés avec pytest.
 
 Pour lancer les tests:
 
-</> Bash
-    pytest -v
+`</> Bash
+`
+
+   ` pytest -v
+   `
+
+## Auteur
+
+Projet realisé dans le cadre d'un exercice Python portant sur:
+
+- Peewee
+
+- CRUD
+
+- architecture de projet Python
+
+- tests avec pytest
