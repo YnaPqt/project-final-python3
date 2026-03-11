@@ -60,7 +60,8 @@ La base de données contient les tables suivantes:
 **Genre :** Contient les genres d'animés.
 
 ## Installation
-Cloner le projet: 
+
+**Cloner le projet:**
 
 `</> Bash
 `
@@ -69,7 +70,7 @@ Cloner le projet:
     cd  Projet_Final_Python3
 `
 
-Créer un environnement virtuel:
+**Créer un environnement virtuel:**
 
 `</> Bash
 `
@@ -77,7 +78,7 @@ Créer un environnement virtuel:
  `  python -m venv .venv
 `
 
-Activer l'environnement:
+**Activer l'environnement:**
 
 Mac / Linux
 
@@ -95,7 +96,7 @@ Windows
 `    .venv\Scripts\activate
     `
 
-Installer les dépendances:
+**Installer les dépendances:**
 
 `</> Bash
 `
