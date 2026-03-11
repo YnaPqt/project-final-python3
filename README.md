@@ -36,39 +36,40 @@ Les informations enregistrées pour chaque animé comprennent:
   - requirements.txt
   - README.md
  
-*models.py* - Défintion des modèles Peewee et structure de la base de données
+*models.py - Défintion des modèles Peewee et structure de la base de données*
 
-*anime_modules.py* - Logique de l'application et les fonctions en CRUD
+*anime_modules.py - Logique de l'application et les fonctions en CRUD*
 
-*app.py* - Interface en ligne de commade dont le menu interactif
+*app.py - Interface en ligne de commade dont le menu interactif*
 
-*test_app.py* - Tests automatisés avec pytest
+*test_app.py - Tests automatisés avec pytest*
 
-*anime.db* - Base de données SQLite
+*anime.db - Base de données SQLite*
 
-*requirements.txt* - Dépendances du projet
+*requirements.txt - Dépendances du projet*
 
 ## Modèles de données
 La base de données contient les tables suivantes:
 
 **Studio :** Contient les studios de production
+
 **Anime :** Contient les informations principales sur les animés.
+
 **Character :** Contient les personnages associés à un animé.
+
 **Genre :** Contient les genres d'animés.
 
 ## Installation
 Cloner le projet:
 
-</> Bash
-
-`    git clone https://github.com/YnaPqt/project-final-python3.git
+`</> Bash  
+git clone https://github.com/YnaPqt/project-final-python3.git
     cd  Projet_Final_Python3`
 
 Créer un environnement virtuel:
 
-</> Bash
-
-   ` python -m venv .venv
+   `</> Bash
+   python -m venv .venv
 `
 Activer l'environnement:
 
